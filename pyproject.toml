@@ -1,7 +1,7 @@
 [tool.kedro]
 package_name = "anomaly_detection_pipeline_kedro"
 project_name = "Anomaly Detection Pipeline (Kedro)"
-project_version = "0.17.7"
+project_version = "0.18.12"
 
 [tool.isort]
 multi_line_output = 3
