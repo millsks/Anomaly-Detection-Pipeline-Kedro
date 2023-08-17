@@ -170,3 +170,6 @@ media/
 
 # Ignore mlflow runs
 mlruns/
+
+# Ignore kedro install logs
+/src/anon-detect-kedro-install.out
