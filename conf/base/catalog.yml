@@ -1,9 +1,10 @@
-raw_pickled_dataframes:
+raw_daily_data:
   type: kedro_mlflow.io.artifacts.MlflowArtifactDataSet
   data_set:
-    type: pickle.PickleDataSet
-    filepath: data/01_raw/2018-04_09_all.pkl
-    backend: pickle
+    type: PartitionedDataSet
+    path: data/01_raw  # path to the location of partitions
+    dataset: pickle.PickleDataSet
+  layer: raw
 
 
 processed_data:

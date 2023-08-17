@@ -10,6 +10,31 @@ from typing import Any, Callable, Dict
 import pandas as pd
 
 
+def merge_data(partitioned_input: Dict[str, Callable[[], Any]]) -> pd.DataFrame:
+    """Concatenate input partitions into one pandas DataFrame.
+
+    Args:
+        partitioned_input: A dictionary with partition ids as keys and load functions as values.
+
+    Returns:
+        Pandas DataFrame representing a concatenation of all loaded partitions.
+    """
+    merged_df = pd.DataFrame()
+
+    for _, partition_load_func in sorted(partitioned_input.items()):
+        partition_data = partition_load_func()  # load actual partition data
+
+        if merged_df.columns.empty:
+            merged_df = pd.DataFrame(columns=partition_data.columns)
+
+        merged_df = pd.concat([merged_df, partition_data], ignore_index=True, sort=True) # concat with existing result
+
+    print(merged_df.head())
+
+    return merged_df
+
+
+
 def process_data(merged_df: pd.DataFrame, predictor_cols: list) -> pd.DataFrame:
     """Process the merged dataset
 
