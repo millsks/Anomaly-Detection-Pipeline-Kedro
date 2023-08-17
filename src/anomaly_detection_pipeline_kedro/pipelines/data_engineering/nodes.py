@@ -8,24 +8,6 @@ import pandas as pd
 from datetime import timedelta, datetime as dt
 
 
-def merge_data(partitioned_input: Dict[str, Callable[[], Any]]) -> pd.DataFrame:
-    """Concatenate input partitions into one pandas DataFrame.
-
-    Args:
-        partitioned_input: A dictionary with partition ids as keys and load functions as values.
-
-    Returns:
-        Pandas DataFrame representing a concatenation of all loaded partitions.
-    """
-    merged_df = pd.DataFrame()
-
-    for partition_id, partition_load_func in sorted(partitioned_input.items()):
-        partition_data = partition_load_func()  # load actual partition data
-        merged_df = pd.concat([merged_df, partition_data], ignore_index=True, sort=True) # concat with existing result
-
-    return merged_df
-
-
 def process_data(merged_df: pd.DataFrame, predictor_cols: list) -> pd.DataFrame:
     """Process the merged dataset
 
@@ -61,8 +43,8 @@ def train_test_split(processed_df: pd.DataFrame) -> pd.DataFrame:
     test_df = processed_df.loc[processed_df['TX_DATE'] > split_date]
 
     # Drop date column
-    train_df.drop(columns=['TX_DATE'], inplace=True)
-    test_df.drop(columns=['TX_DATE'], inplace=True)
+    train_df = train_df.drop(columns=['TX_DATE'])
+    test_df = test_df.drop(columns=['TX_DATE'])
 
     # Drop actual label in dataset if any (supposed to be unsupervised training)
     if 'TX_FRAUD' in train_df.columns:
