@@ -5,8 +5,11 @@ generated using Kedro 0.17.7
 
 import numpy as np
 import pandas as pd
-import sklearn
 from sklearn.ensemble import IsolationForest
+
+import mlflow
+
+mlflow.autolog()
 
 def train_model(train_df: pd.DataFrame, contamination_value: float):
     # Initialize isolation forest classifier model
