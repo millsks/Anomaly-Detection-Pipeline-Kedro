@@ -1,17 +1,9 @@
-raw_daily_data:
+raw_pickled_dataframes:
   type: kedro_mlflow.io.artifacts.MlflowArtifactDataSet
   data_set:
     type: pickle.PickleDataSet
     filepath: data/01_raw/2018-04_09_all.pkl
     backend: pickle
-
-
-merged_data:
-  type: kedro_mlflow.io.artifacts.MlflowArtifactDataSet
-  data_set:
-    type: pandas.CSVDataSet
-    filepath: data/02_intermediate/merged_data.csv
-  layer: intermediate
 
 
 processed_data:
