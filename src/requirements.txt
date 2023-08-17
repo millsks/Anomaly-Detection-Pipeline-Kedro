@@ -1,20 +1,29 @@
-black==21.5b1
-flake8>=3.7.9, <4.0
-ipython~=7.10
-ipython~=7.16.3; python_version == '3.6'
-ipython>=7.31.1, <8.0; python_version > '3.6'
-isort~=5.0
-jupyter~=1.0
-jupyter_client>=5.1, <7.0
-jupyterlab~=3.0
-kedro==0.17.7
-kedro-telemetry~=0.1.0
-matplotlib>=3.5
-nbstripout~=0.4
-numpy>=1.21
-pandas>=1.3
-pytest-cov~=3.0
-pytest-mock>=1.7.1, <2.0
-pytest~=6.2
-scikit-learn>=1.0
-wheel~>0.38.1
+black>=23.7.0,<24.0.0
+flake8>=6.0.0,<7.0.0
+ipython>=7.31.1,<9.0
+isort>=5.12.0
+jupyter>=1.0.0
+jupyter_client>=5.1,<9.0
+jupyterlab>=3.0
+kedro>=0.18.12,<0.19.0
+kedro-datasets>=1.5.1,<2.0.0
+kedro-airflow>=0.6.0,<1.0.0
+kedro-mlflow>=0.11.9,<1.0.0
+kedro-viz >=6.3.4,<7.0.0
+matplotlib>=3.4
+nbstripout>=0.4
+numpy>=1.22.0
+pandas>=1.3.5,<2.0.0   # Need to cap at 2.0.0 because the raw data is using data frames that reference pandas.core.indexes.numeric
+pytest-cov>=4.1.0
+pytest-mock>=3.11.0
+pytest>=7.4.0
+scikit-learn>=1.3.0
+wheel>=0.40.0
+mdurl~=0.1
+smmap<6,>=3.0.1
+chardet>=3.0.2
+python-json-logger>=2.0.1
+urllib3<2.0.0,>=1.26.7
+oauthlib>=3.1.0
+pyjwt>=1.7.0
+tabulate>=0.7.7
