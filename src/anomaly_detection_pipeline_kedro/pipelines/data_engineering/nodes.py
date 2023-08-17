@@ -3,9 +3,11 @@ This is a boilerplate pipeline 'data_engineering'
 generated using Kedro 0.17.7
 """
 
+from datetime import datetime as dt
+from datetime import timedelta
 from typing import Any, Callable, Dict
+
 import pandas as pd
-from datetime import timedelta, datetime as dt
 
 
 def process_data(merged_df: pd.DataFrame, predictor_cols: list) -> pd.DataFrame:
@@ -18,8 +20,10 @@ def process_data(merged_df: pd.DataFrame, predictor_cols: list) -> pd.DataFrame:
         pd.DataFrame: Pandas dataframe representing the processed dataset
     """
     # Generate date column
-    merged_df['TX_DATETIME'] =  pd.to_datetime(merged_df['TX_DATETIME'], infer_datetime_format=True)
-    merged_df['TX_DATE'] = merged_df['TX_DATETIME'].dt.date
+    merged_df["TX_DATETIME"] = pd.to_datetime(
+        merged_df["TX_DATETIME"], infer_datetime_format=True
+    )
+    merged_df["TX_DATE"] = merged_df["TX_DATETIME"].dt.date
 
     # Only keep columns which are meaningful and predictive (based on domain knowledge)
     processed_df = merged_df[predictor_cols]
@@ -37,24 +41,26 @@ def train_test_split(processed_df: pd.DataFrame) -> pd.DataFrame:
         Pandas dataframes of the training data, test data, and test labels (if any)
     """
     # Perform chronological train test split (80:20) i.e. 8 weeks:2 weeks
-    processed_df['TX_DATE'] =  pd.to_datetime(processed_df['TX_DATE'], infer_datetime_format=True)
-    split_date = processed_df['TX_DATE'].min() + timedelta(days=(8*7)) 
-    train_df = processed_df.loc[processed_df['TX_DATE'] <= split_date]
-    test_df = processed_df.loc[processed_df['TX_DATE'] > split_date]
+    processed_df["TX_DATE"] = pd.to_datetime(
+        processed_df["TX_DATE"], infer_datetime_format=True
+    )
+    split_date = processed_df["TX_DATE"].min() + timedelta(days=(8 * 7))
+    train_df = processed_df.loc[processed_df["TX_DATE"] <= split_date]
+    test_df = processed_df.loc[processed_df["TX_DATE"] > split_date]
 
     # Drop date column
-    train_df = train_df.drop(columns=['TX_DATE'])
-    test_df = test_df.drop(columns=['TX_DATE'])
+    train_df = train_df.drop(columns=["TX_DATE"])
+    test_df = test_df.drop(columns=["TX_DATE"])
 
     # Drop actual label in dataset if any (supposed to be unsupervised training)
-    if 'TX_FRAUD' in train_df.columns:
-        train_df = train_df.drop(columns=['TX_FRAUD'])
-    
+    if "TX_FRAUD" in train_df.columns:
+        train_df = train_df.drop(columns=["TX_FRAUD"])
+
     # Store test labels (if any) for subsequent model evaluation
-    if 'TX_FRAUD' in test_df.columns:
-        test_labels = test_df[['TX_FRAUD']]
-        test_df = test_df.drop(columns=['TX_FRAUD'])
+    if "TX_FRAUD" in test_df.columns:
+        test_labels = test_df[["TX_FRAUD"]]
+        test_df = test_df.drop(columns=["TX_FRAUD"])
     else:
-        test_labels = pd.DataFrame() # Empty dataframe if no test labels present
+        test_labels = pd.DataFrame()  # Empty dataframe if no test labels present
 
     return train_df, test_df, test_labels

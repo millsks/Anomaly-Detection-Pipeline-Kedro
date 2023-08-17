@@ -1,12 +1,12 @@
 """Project pipelines."""
 from typing import Dict
+
 from kedro.pipeline import Pipeline, pipeline
 
-from anomaly_detection_pipeline_kedro.pipelines import (
-    data_engineering as de,
-    data_science as ds,
-    model_evaluation as me
-)
+from anomaly_detection_pipeline_kedro.pipelines import data_engineering as de
+from anomaly_detection_pipeline_kedro.pipelines import data_science as ds
+from anomaly_detection_pipeline_kedro.pipelines import model_evaluation as me
+
 
 def register_pipelines() -> Dict[str, Pipeline]:
     """Register the project's pipelines.
@@ -22,5 +22,7 @@ def register_pipelines() -> Dict[str, Pipeline]:
         "de": data_engineering_pipeline,
         "ds": data_science_pipeline,
         "me": model_evaluation_pipeline,
-        "__default__": data_engineering_pipeline + data_science_pipeline + model_evaluation_pipeline
+        "__default__": data_engineering_pipeline
+        + data_science_pipeline
+        + model_evaluation_pipeline,
     }

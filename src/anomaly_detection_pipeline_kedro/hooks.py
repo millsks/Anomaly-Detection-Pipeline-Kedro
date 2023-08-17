@@ -9,7 +9,10 @@ from kedro.io import DataCatalog
 class ProjectHooks:
     @hook_impl
     def register_config_loader(
-        self, conf_paths: Iterable[str], env: str, extra_params: Dict[str, Any],
+        self,
+        conf_paths: Iterable[str],
+        env: str,
+        extra_params: Dict[str, Any],
     ) -> OmegaConfigLoader:
         return OmegaConfigLoader(conf_paths)
 
