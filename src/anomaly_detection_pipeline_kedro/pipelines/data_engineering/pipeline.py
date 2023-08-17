@@ -4,21 +4,14 @@ generated using Kedro 0.17.7
 """
 
 from kedro.pipeline import Pipeline, node, pipeline
-from .nodes import merge_data, process_data, train_test_split
+from .nodes import process_data, train_test_split
 
-def create_pipeline(**kwargs) -> Pipeline:
+def create_pipeline() -> Pipeline:
     return pipeline([
 
         node(
-            func=merge_data,
-            inputs="raw_daily_data",
-            outputs="merged_data",
-            name="node_merge_raw_daily_data"
-            ),
-
-        node(
             func=process_data,
-            inputs=["merged_data", "params:predictor_cols"],
+            inputs=["raw_pickled_dataframes", "params:predictor_cols"],
             outputs="processed_data",
             name="node_process_data"
             ),
