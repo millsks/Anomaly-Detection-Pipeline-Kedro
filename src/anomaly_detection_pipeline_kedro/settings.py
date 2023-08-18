@@ -1,5 +1,8 @@
 """Project settings."""
 from anomaly_detection_pipeline_kedro.hooks import ProjectHooks
+from kedro.config import OmegaConfigLoader
+
+CONFIG_LOADER_CLASS = OmegaConfigLoader
 
 # Instantiate and list your project hooks here
 HOOKS = (ProjectHooks(),)
