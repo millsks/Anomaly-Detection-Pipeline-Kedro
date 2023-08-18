@@ -29,8 +29,6 @@ def merge_data(partitioned_input: Dict[str, Callable[[], Any]]) -> pd.DataFrame:
 
         merged_df = pd.concat([merged_df, partition_data], ignore_index=True, sort=True) # concat with existing result
 
-    print(merged_df.head())
-
     return merged_df
 
 
