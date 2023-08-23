@@ -36,7 +36,7 @@ Please see the [walkthrough article](https://neptune.ai/blog/data-science-pipeli
 ## Installing and running packaged kedro pipeline
 **_NOTE: The `conda env update` command below will be faster if you use `mamba`_**
 
-1. Download the files from the `dist` folder.
+1. Download the files from the [dist](https://github.com/millsks/Anomaly-Detection-Pipeline-Kedro/tree/main/dist) directory.
 2. Create the conda environment using the supplied environment.yml file - `conda env update -n anom-detect-kedro --prune --file environment.yml`
 3. Activate the conda environment - `conda activate anom-detect-kedro`
 4. Install the packaged kedro pipeline - `pip install anomaly_detection_pipeline_kedro-0.3-py3-none-any.whl --no-deps`
