@@ -1,0 +1,2 @@
+[console_scripts]
+Anomaly-Detection-Pipeline-Kedro = anomaly_detection_pipeline_kedro.__main__:main
