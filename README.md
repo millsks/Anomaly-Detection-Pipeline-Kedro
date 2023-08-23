@@ -39,7 +39,7 @@ Please see the [walkthrough article](https://neptune.ai/blog/data-science-pipeli
 1. Download the files from the `dist` folder.
 2. Create the conda environment using the supplied environment.yml file - `conda env update -n anom-detect-kedro --prune --file environment.yml`
 3. Activate the conda environment - `conda activate anom-detect-kedro`
-4. Install the packaged kedro pipeline - `pip install anom_detect_kedro-0.0.1-py3-none-any.whl --no-deps`
+4. Install the packaged kedro pipeline - `pip install anomaly_detection_pipeline_kedro-0.3-py3-none-any.whl --no-deps`
 5. Decompress the data files in the pipeline_data files - `cat pipeline_data*|tar zxvf -`
 6. Run the pipeline - `python -m anomaly_detection_pipeline_kedro --conf-source=conf-anomaly_detection_pipeline_kedro.tar.gz`
 7. In another session run the MLflow server - `mlflow server`
