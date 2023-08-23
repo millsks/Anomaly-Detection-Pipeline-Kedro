@@ -1,6 +1,10 @@
 """Project settings."""
+import pathlib
+
 from anomaly_detection_pipeline_kedro.hooks import ProjectHooks
 from kedro.config import OmegaConfigLoader
+
+pathlib.Path("logs").mkdir(exist_ok=True)
 
 CONFIG_LOADER_CLASS = OmegaConfigLoader
 
