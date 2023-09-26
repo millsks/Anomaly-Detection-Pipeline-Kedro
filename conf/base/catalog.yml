@@ -3,8 +3,12 @@ raw_daily_data:
   data_set:
     type: PartitionedDataSet
     path: data/01_raw  # path to the location of partitions
-    dataset: pickle.PickleDataSet
-  layer: raw
+    dataset: pandas.ParquetDataSet  # type of dataset to read
+    metadata:
+      kedro-viz:
+        layer: raw
+        preview_args:
+          nrows: 5
 
 
 processed_data:
@@ -12,8 +16,11 @@ processed_data:
   data_set:
     type: pandas.CSVDataSet
     filepath: data/03_primary/processed_data.csv
-  layer: primary
-
+    metadata:
+      kedro-viz:
+        layer: primary
+        preview_args:
+            nrows: 5
 
 train_data:
   type: kedro_mlflow.io.artifacts.MlflowArtifactDataSet
@@ -59,3 +66,10 @@ evaluation_plot:
   data_set:
     type: matplotlib.MatplotlibWriter
     filepath: data/08_reporting/auc_plots.png
+
+
+metrics:
+  type: kedro_mlflow.io.artifacts.MlflowArtifactDataSet
+  data_set:
+    type: tracking.MetricsDataSet
+    filepath: data/09_tracking/metrics.json

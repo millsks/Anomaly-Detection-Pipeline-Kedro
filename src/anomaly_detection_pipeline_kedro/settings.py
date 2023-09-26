@@ -1,15 +1,19 @@
 """Project settings."""
-import pathlib
-
 from anomaly_detection_pipeline_kedro.hooks import ProjectHooks
 from kedro.config import OmegaConfigLoader
 
-pathlib.Path("logs").mkdir(exist_ok=True)
+from kedro_viz.integrations.kedro.sqlite_store import SQLiteStore
+from pathlib import Path
+
+Path("logs").mkdir(exist_ok=True)
 
 CONFIG_LOADER_CLASS = OmegaConfigLoader
 
 # Instantiate and list your project hooks here
 HOOKS = (ProjectHooks(),)
+
+SESSION_STORE_CLASS = SQLiteStore
+SESSION_STORE_ARGS = {"path": str(Path(__file__).parents[2] / "data")}
 
 # List the installed plugins for which to disable auto-registry
 # DISABLE_HOOKS_FOR_PLUGINS = ("kedro-viz",)
@@ -28,3 +32,4 @@ HOOKS = (ProjectHooks(),)
 
 # Define the configuration folder. Defaults to `conf`
 # CONF_ROOT = "conf"
+

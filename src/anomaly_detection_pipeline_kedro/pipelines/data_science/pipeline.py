@@ -20,7 +20,7 @@ def create_pipeline() -> Pipeline:
             node(
                 func=predict,
                 inputs=["ml_model", "test_data"],
-                outputs="predictions",
+                outputs=["predictions", "metrics"],
                 name="node_predict",
             ),
         ]
